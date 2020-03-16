@@ -627,6 +627,11 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         mListener = listener
     }
 
+
+    fun setSettingOnClickListener(listener: OnClickListener) {
+        mSettingIcon.setOnClickListener(listener)
+    }
+
     interface CalendarListener {
 
         // triggered when a day is selected programmatically or clicked by user.

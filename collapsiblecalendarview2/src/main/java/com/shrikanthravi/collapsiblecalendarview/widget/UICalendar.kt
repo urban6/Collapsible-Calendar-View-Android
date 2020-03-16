@@ -19,7 +19,6 @@ import java.util.*
 import android.os.Build
 
 
-
 @SuppressLint("ClickableViewAccessibility")
 abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ScrollView(context, attrs, defStyleAttr) {
 
@@ -42,12 +41,15 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
     protected var mBtnNextWeek: ImageView
     protected var expandIconView: ExpandIconView
     protected var clEntireTextView: LinearLayout
-    protected var mTodayIcon : ImageView
+    protected var mTodayIcon: ImageView
+    protected var mSettingIcon: ImageView
+
     var datePattern = "MMMM"
         set(value: String) {
             field = value
 
         }
+
     // Attributes
     var isShowWeek = true
         set(showWeek) {
@@ -149,8 +151,11 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         private set(eventColor) {
             field = eventColor
             redraw()
-
         }
+
+    fun setWeeklyView() {
+        expandIconView.performClick()
+    }
 
     fun getSwipe(context: Context): OnSwipeTouchListener {
         return object : OnSwipeTouchListener(context) {
@@ -201,6 +206,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         mLayoutRoot = rootView.findViewById(R.id.layout_root)
         mTxtTitle = rootView.findViewById(R.id.txt_title)
         mTodayIcon = rootView.findViewById(R.id.today_icon)
+        mSettingIcon = rootView.findViewById(R.id.setting_icon)
         mTableHead = rootView.findViewById(R.id.table_head)
         mTableBody = rootView.findViewById(R.id.table_body)
         mLayoutBtnGroupMonth = rootView.findViewById(R.id.layout_btn_group_month)
@@ -325,6 +331,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         val THURSDAY = 4
         val FRIDAY = 5
         val SATURDAY = 6
+
         // State
         val STATE_EXPANDED = 0
         val STATE_COLLAPSED = 1
