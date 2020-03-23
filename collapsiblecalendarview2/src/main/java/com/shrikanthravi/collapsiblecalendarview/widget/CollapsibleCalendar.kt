@@ -449,23 +449,49 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         mListener?.onDayChanged()
     }
 
-    fun prevWeek() {
+
+    /**
+     * [nextWeek] 의 주석을 참고 !
+     */
+    private fun prevWeek() {
+        val myAnim = AnimationUtils.loadAnimation(context, R.anim.right_to_left)
+
+        // 테이블 뷰에 에니메이션 설정
+        mTableBody.startAnimation(myAnim)
+
         if (mCurrentWeekIndex - 1 < 0) {
             mCurrentWeekIndex = -1
             prevMonth()
         } else {
             mCurrentWeekIndex--
-            collapseTo(mCurrentWeekIndex)
+            // collapseTo(mCurrentWeekIndex)
+            collapseToHorizontal(mCurrentWeekIndex)
         }
     }
 
-    fun nextWeek() {
+
+    /**
+     * 기존의 메소드는 오른쪽에서 왼쪽으로 스와이프를 할 때,
+     * 아래에서 날짜가 올라오는 애니메이션이 보인다.
+     * 이를 해결하기 위해서 새로운 애니메이션을 적용하고
+     * [collapseToHorizontal] 를 사용해서 날짜가 올라오는 애니메이션이 보이지 않도록 했다.
+     *
+     * ETC - 달이 넘어 갈 때에는 날짜가 올라오는 애니메이션이 있지만 그대로 사용하고 있다.
+     */
+    private fun nextWeek() {
+        // R.anim.right_to_left 오른쪽에서 왼쪽으로 이동하는 애니메이션이다.
+        val myAnim = AnimationUtils.loadAnimation(context, R.anim.right_to_left)
+
+        // 테이블 뷰에 에니메이션 설정
+        mTableBody.startAnimation(myAnim)
+
         if (mCurrentWeekIndex + 1 >= mTableBody.childCount) {
             mCurrentWeekIndex = 0
             nextMonth()
         } else {
             mCurrentWeekIndex++
-            collapseTo(mCurrentWeekIndex)
+            // collapseTo(mCurrentWeekIndex) // 기존에 사용하는 코드
+            collapseToHorizontal(mCurrentWeekIndex)
         }
     }
 
@@ -559,6 +585,37 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
 
             mHandler.post { mScrollViewBody.smoothScrollTo(0, topHeight) }
 
+            if (mListener != null) {
+                mListener!!.onWeekChange(mCurrentWeekIndex)
+            }
+        }
+    }
+
+
+    /**
+     * 새로 커스텀한 메소드이다.
+     * 기존의 [collapseTo] 는 [smoothScrollTo] 를 사용하기 때문에 주 단위가 바뀔 때 스크롤 애니메이션이 보인다.
+     * 스크롤이 보이지 않도록 하기 위해서 이 메소드에서는 [scrollTo] 를 사용한다.
+     */
+    private fun collapseToHorizontal(index: Int) {
+        var index = index
+        if (state == STATE_COLLAPSED) {
+            if (index == -1) {
+                index = mTableBody.childCount - 1
+            }
+            mCurrentWeekIndex = index
+
+            val targetHeight = mTableBody.getChildAt(index).measuredHeight
+            var tempHeight = 0
+            for (i in 0 until index) {
+                tempHeight += mTableBody.getChildAt(i).measuredHeight
+            }
+            val topHeight = tempHeight
+
+            mScrollViewBody.layoutParams.height = targetHeight
+            mScrollViewBody.requestLayout()
+
+            mHandler.post { mScrollViewBody.scrollTo(0, topHeight) }
 
             if (mListener != null) {
                 mListener!!.onWeekChange(mCurrentWeekIndex)
@@ -635,23 +692,23 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     interface CalendarListener {
 
         // triggered when a day is selected programmatically or clicked by user.
-        fun onDaySelect() {}
+        fun onDaySelect()
 
         // triggered only when the views of day on calendar are clicked by user.
-        fun onItemClick(v: View) {}
+        fun onItemClick(v: View)
 
         // triggered when the data of calendar are updated by changing month or adding events.
-        fun onDataUpdate() {}
+        fun onDataUpdate()
 
         // triggered when the month are changed.
-        fun onMonthChange() {}
+        fun onMonthChange()
 
         // triggered when the week position are changed.
-        fun onWeekChange(position: Int) {}
+        fun onWeekChange(position: Int)
 
-        fun onClickListener() {}
+        fun onClickListener()
 
-        fun onDayChanged() {}
+        fun onDayChanged()
     }
 
     fun setExpandIconVisible(visible: Boolean) {
