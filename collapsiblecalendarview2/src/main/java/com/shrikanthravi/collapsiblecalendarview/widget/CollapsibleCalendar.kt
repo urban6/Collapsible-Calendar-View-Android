@@ -635,23 +635,23 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     interface CalendarListener {
 
         // triggered when a day is selected programmatically or clicked by user.
-        fun onDaySelect()
+        fun onDaySelect() {}
 
         // triggered only when the views of day on calendar are clicked by user.
-        fun onItemClick(v: View)
+        fun onItemClick(v: View) {}
 
         // triggered when the data of calendar are updated by changing month or adding events.
-        fun onDataUpdate()
+        fun onDataUpdate() {}
 
         // triggered when the month are changed.
-        fun onMonthChange()
+        fun onMonthChange() {}
 
         // triggered when the week position are changed.
-        fun onWeekChange(position: Int)
+        fun onWeekChange(position: Int) {}
 
-        fun onClickListener()
+        fun onClickListener() {}
 
-        fun onDayChanged()
+        fun onDayChanged() {}
     }
 
     fun setExpandIconVisible(visible: Boolean) {
