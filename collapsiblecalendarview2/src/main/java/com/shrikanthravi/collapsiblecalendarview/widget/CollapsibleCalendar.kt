@@ -57,6 +57,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
 
     private var mAdapter: CalendarAdapter? = null
     private var mListener: CalendarListener? = null
+    private var dayListener: DaySelectListener? = null
 
     var expanded = false
 
@@ -668,6 +669,10 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         if (mListener != null) {
             mListener!!.onDaySelect()
         }
+
+        if (dayListener != null) {
+            dayListener!!.onDaySelect()
+        }
     }
 
     fun setStateWithUpdateUI(state: Int) {
@@ -684,9 +689,18 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         mListener = listener
     }
 
+    fun setDaySelectListener(listener: DaySelectListener){
+        dayListener = listener
+    }
+
 
     fun setSettingOnClickListener(listener: OnClickListener) {
         mSettingIcon.setOnClickListener(listener)
+    }
+
+
+    interface DaySelectListener {
+        fun onDaySelect()
     }
 
     interface CalendarListener {

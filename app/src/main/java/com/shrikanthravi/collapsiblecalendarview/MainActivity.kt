@@ -68,6 +68,15 @@ class MainActivity : AppCompatActivity(){
         today.add(Calendar.DATE, 1)
         collapsibleCalendar.selectedDay = Day(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
         collapsibleCalendar.params = CollapsibleCalendar.Params(0, 100)
+
+        collapsibleCalendar.setDaySelectListener(object : CollapsibleCalendar.DaySelectListener {
+            override fun onDaySelect() {
+                Log.d("TEST", collapsibleCalendar.selectedDay?.getDatetime("yyyy-MM-dd"))
+            }
+
+        })
+
+        /*
         collapsibleCalendar.setCalendarListener(object : CollapsibleCalendar.CalendarListener {
             override fun onDayChanged() {
 
@@ -103,5 +112,6 @@ class MainActivity : AppCompatActivity(){
 
             }
         })
+         */
     }
 }
