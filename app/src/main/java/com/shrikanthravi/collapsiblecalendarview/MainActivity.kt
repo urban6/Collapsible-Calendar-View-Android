@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity(){
 
             override fun onDaySelect() {
                 textView.text = collapsibleCalendar.selectedDay?.toUnixTime().toString()
+                Log.d("TEST", collapsibleCalendar.selectedDay?.getDatetime("yyyy-MM-dd"))
             }
 
             override fun onItemClick(v: View) {
