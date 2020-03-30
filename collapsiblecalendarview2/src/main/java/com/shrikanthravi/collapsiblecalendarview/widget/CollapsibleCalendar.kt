@@ -191,6 +191,8 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
 
         mTodayIcon.setOnClickListener { changeToToday() }
 
+        tvToday.setOnClickListener { changeToToday() }
+
         expandIconView.setState(ExpandIconView.MORE, true)
 
 
@@ -496,6 +498,10 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         }
     }
 
+    fun setCurrentDay(day: Int) {
+        tvToday.text = day.toString()
+    }
+
     fun isSelectedDay(day: Day?): Boolean {
         return (day != null
                 && selectedItem != null
@@ -663,6 +669,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
 
     fun select(day: Day) {
         selectedItem = Day(day.year, day.month, day.day)
+
 
         redraw()
 

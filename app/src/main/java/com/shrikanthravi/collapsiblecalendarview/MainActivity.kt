@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity(){
 
         })
 
+        collapsibleCalendar.setCurrentDay(3)
+
         /*
         collapsibleCalendar.setCalendarListener(object : CollapsibleCalendar.CalendarListener {
             override fun onDayChanged() {

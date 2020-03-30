@@ -44,6 +44,9 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
     protected var mTodayIcon: ImageView
     protected var mSettingIcon: ImageView
 
+    // 추가된 부분
+    protected var tvToday: TextView
+
     var datePattern = "MMMM"
         set(value: String) {
             field = value
@@ -206,6 +209,10 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         mLayoutRoot = rootView.findViewById(R.id.layout_root)
         mTxtTitle = rootView.findViewById(R.id.txt_title)
         mTodayIcon = rootView.findViewById(R.id.today_icon)
+
+        // 추가된 부분
+        tvToday = rootView.findViewById(R.id.tv_today)
+
         mSettingIcon = rootView.findViewById(R.id.setting_icon)
         mTableHead = rootView.findViewById(R.id.table_head)
         mTableBody = rootView.findViewById(R.id.table_body)
