@@ -65,6 +65,14 @@ class MainActivity : AppCompatActivity(){
         collapsibleCalendar.setExpandIconVisible(true)
         val today = GregorianCalendar()
         collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
+        collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH) - 7)
+        collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH) - 14)
+        collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH) - 21)
+
+        collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH) + 1, today.get(Calendar.DAY_OF_MONTH) - 7)
+        collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH)+ 1, today.get(Calendar.DAY_OF_MONTH) - 14)
+        collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH)+ 1, today.get(Calendar.DAY_OF_MONTH) - 21)
+
         today.add(Calendar.DATE, 1)
         collapsibleCalendar.selectedDay = Day(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
         collapsibleCalendar.params = CollapsibleCalendar.Params(0, 100)
