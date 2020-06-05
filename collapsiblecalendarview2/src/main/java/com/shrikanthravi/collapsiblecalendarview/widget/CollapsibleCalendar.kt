@@ -181,6 +181,8 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
 
         // bind events
 
+
+
         mBtnPrevMonth.setOnClickListener { prevMonth() }
 
         mBtnNextMonth.setOnClickListener { nextMonth() }
@@ -705,6 +707,16 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         mSettingIcon.setOnClickListener(listener)
     }
 
+    // 다음 달 이동 클릭 리스너 설정
+    // 달을 이동하는 메소드는 사용하는 곳에서 재정의해서 사용할 수 있도록 했음
+    fun setNextMonthOnClickListener(listener: OnClickListener) {
+        mNexMonthIcon.setOnClickListener(listener)
+    }
+
+    // 이전 달 이동 클릭 리스너 설정
+    fun setPrevMonthOnClickListener(listener: OnClickListener) {
+        mPrevMonthIcon.setOnClickListener(listener)
+    }
 
     interface DaySelectListener {
         fun onDaySelect()

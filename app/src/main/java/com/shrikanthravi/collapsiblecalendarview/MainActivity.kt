@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.shrikanthravi.collapsiblecalendarview.data.Day
 import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity(){
         var textView = findViewById<TextView>(R.id.tv_date)
 
         collapsibleCalendar = findViewById(R.id.collapsibleCalendarView)
+
         relativeLayout.setOnTouchListener(object:OnSwipeTouchListener(this@MainActivity){
             override fun onSwipeRight() {
                 collapsibleCalendar.nextDay()
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity(){
         });
 
         //To hide or show expand icon
-        collapsibleCalendar.setExpandIconVisible(true)
+        collapsibleCalendar.setExpandIconVisible(false)
         val today = GregorianCalendar()
         collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
         collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH) - 7)
@@ -82,6 +84,10 @@ class MainActivity : AppCompatActivity(){
                 Log.d("TEST", collapsibleCalendar.selectedDay?.getDatetime("yyyy-MM-dd"))
             }
 
+        })
+
+        collapsibleCalendar.setPrevMonthOnClickListener(View.OnClickListener {
+            Log.d("MainActivity", "Prev Month Icon Clicked")
         })
 
         collapsibleCalendar.setCurrentDay(3)

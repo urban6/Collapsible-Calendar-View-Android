@@ -44,6 +44,10 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
     protected var mTodayIcon: ImageView
     protected var mSettingIcon: ImageView
 
+    // 월 이동 아이콘
+    protected var mPrevMonthIcon: ImageView
+    protected var mNexMonthIcon: ImageView
+
     // 추가된 부분
     protected var tvToday: TextView
 
@@ -212,6 +216,8 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
 
         // 추가된 부분
         tvToday = rootView.findViewById(R.id.tv_today)
+        mPrevMonthIcon = rootView.findViewById(R.id.iv_prev_month)
+        mNexMonthIcon = rootView.findViewById(R.id.iv_next_month)
 
         mSettingIcon = rootView.findViewById(R.id.setting_icon)
         mTableHead = rootView.findViewById(R.id.table_head)
@@ -228,9 +234,9 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         clEntireTextView.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
             expandIconView.performClick()
         })
-        mLayoutRoot.setOnTouchListener(getSwipe(context));
-        mScrollViewBody.setOnTouchListener(getSwipe(context))
-        mScrollViewBody.setParams(getSwipe(context))
+        // mLayoutRoot.setOnTouchListener(getSwipe(context));
+        // mScrollViewBody.setOnTouchListener(getSwipe(context))
+        // mScrollViewBody.setParams(getSwipe(context))
         val attributes = context.theme.obtainStyledAttributes(
                 attrs, R.styleable.UICalendar, defStyleAttr, 0)
         setAttributes(attributes)

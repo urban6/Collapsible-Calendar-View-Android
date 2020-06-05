@@ -84,6 +84,18 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
 
+        <ImageView
+            android:id="@+id/iv_prev_month"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24" />
+
         <TextView
             android:id="@+id/txt_title"
             android:layout_width="wrap_content"
@@ -98,12 +110,24 @@
             android:textSize="22sp"
             tools:text="Jun 2015" />
 
+        <ImageView
+            android:id="@+id/iv_next_month"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+
         <com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
             android:id="@+id/expandIcon"
             android:layout_width="20dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:visibility="visible"
+            android:visibility="gone"
             app:eiv_animationDuration="300"
             app:eiv_color="#000"
             app:eiv_colorIntermediate="@android:color/black"
@@ -121,8 +145,7 @@
         <TextView
             android:id="@+id/tv_today"
             android:layout_width="40dp"
-            android:visibility="invisible"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
             android:background="@drawable/ic_crop_5_4_white_32dp"
@@ -132,7 +155,8 @@
             android:gravity="center"
             android:text="31"
             android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/today_icon"
